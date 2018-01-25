@@ -1,0 +1,36 @@
+version: "2"
+services:
+
+  #docker-compose run --rm --service-ports start
+  start:
+    image: asaplabs/homereactor:ubuntu
+    ports:
+      - "3000:3000"
+    command: npm run setup-start
+
+  #docker-compose run --rm --service-ports dev
+  dev:
+    image: asaplabs/homereactor:ubuntu
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./devmodules/:/usr/app/src/devmodules
+      - ./devthumbnails/:/usr/app/src/devthumbnails
+    command: npm run setup-start
+
+  #docker-compose run --rm --service-ports pistart
+  pistart:
+    image: asaplabs/homereactor:arm32
+    ports:
+      - "3000:3000"
+    command: npm run setup-start
+
+  #docker-compose run --rm --service-ports pidev
+  pidev:
+    image: asaplabs/homereactor:arm32
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./devmodules/:/usr/app/src/devmodules
+      - ./devthumbnails/:/usr/app/src/devthumbnails
+    command: npm run setup-start
